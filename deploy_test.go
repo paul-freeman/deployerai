@@ -33,7 +33,6 @@ func testSelectDeploymentTarget(t *testing.T, model deployerai.Model) {
 			args: args{
 				ctx: context.Background(),
 				deploymentRequest: deployerai.Request{
-					CurrentTime:     now,
 					MessageFromUser: "Please deploy pr-1462",
 					DeploymentTargets: []deployerai.Target{
 						{
@@ -62,7 +61,6 @@ func testSelectDeploymentTarget(t *testing.T, model deployerai.Model) {
 			args: args{
 				ctx: context.Background(),
 				deploymentRequest: deployerai.Request{
-					CurrentTime:     now,
 					MessageFromUser: "Please deploy pr-1462",
 					DeploymentTargets: []deployerai.Target{
 						{
@@ -91,7 +89,6 @@ func testSelectDeploymentTarget(t *testing.T, model deployerai.Model) {
 			args: args{
 				ctx: context.Background(),
 				deploymentRequest: deployerai.Request{
-					CurrentTime:     now,
 					MessageFromUser: "Please deploy pr-1462",
 					DeploymentTargets: []deployerai.Target{
 						{

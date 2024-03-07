@@ -15,10 +15,9 @@ import (
 )
 
 type Request struct {
-	CurrentTime       time.Time `json:"current_time"`
-	MessageFromUser   string    `json:"message_from_developer"`
-	DeploymentTargets []Target  `json:"possible_deployment_targets"`
-	AdditionalNotes   string    `json:"additional_notes"`
+	MessageFromUser   string   `json:"message_from_developer"`
+	DeploymentTargets []Target `json:"possible_deployment_targets"`
+	AdditionalNotes   string   `json:"additional_notes"`
 }
 
 type Target struct {
@@ -156,11 +155,21 @@ Your response should be given in JSON format with a field named "deployment_targ
 containing the name of the chosen deployment target and a field named "deployment_image"
 containing the name of the image to be deployed. You should also include a field named "message"
 containing a message for the developer. It should explain why you chose the deployment target
-and any other relevant information.
+and any other relevant information. This message should be in the past tense, as if you are
+explaining your decision after the deployment has been made.
 `
 
+type timeRequest struct {
+	Request
+	CurrentTime time.Time `json:"current_time"`
+}
+
 func makeUserContent(req Request) (string, error) {
-	reqJson, err := json.Marshal(req)
+	timeReq := timeRequest{
+		Request:     req,
+		CurrentTime: time.Now(),
+	}
+	reqJson, err := json.Marshal(timeReq)
 	if err != nil {
 		return "", fmt.Errorf("could not marshal deployment request: %v", err)
 	}
