@@ -97,7 +97,11 @@ func chooseDeploymentTarget(ctx context.Context, model Model, req Request) (Choi
 
 	// Add headers.
 	httpRequest.Header.Set("Content-Type", "application/json")
-	httpRequest.Header.Set("Authorization", "Bearer "+os.Getenv("OPENAI_API_KEY"))
+	key, ok := os.LookupEnv("OPENAI_API_KEY")
+	if !ok {
+		return Choice{}, fmt.Errorf("OPENAI_API_KEY environment variable not set")
+	}
+	httpRequest.Header.Set("Authorization", "Bearer "+key)
 
 	// Create a new HTTP client and send the request.
 	client := &http.Client{}
