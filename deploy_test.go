@@ -128,8 +128,10 @@ func testSelectDeploymentTarget(t *testing.T, model deployerai.Model) {
 					return
 				}
 			case deployerai.Choice:
-				if got != tt.want {
+				if !equalChoices(got, tt.want) {
 					t.Errorf("SelectDeploymentTarget() = %v, want %v", got, tt.want)
+				} else {
+					t.Log(got.Message)
 				}
 			default:
 				t.Errorf("SelectDeploymentTarget() got = %T, want %T", got, deployerai.Choice{})
@@ -137,4 +139,8 @@ func testSelectDeploymentTarget(t *testing.T, model deployerai.Model) {
 			}
 		})
 	}
+}
+
+func equalChoices(a, b deployerai.Choice) bool {
+	return a.DeploymentTargetName == b.DeploymentTargetName && a.DeploymentImage == b.DeploymentImage
 }

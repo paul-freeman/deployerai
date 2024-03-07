@@ -31,6 +31,7 @@ type Target struct {
 type Choice struct {
 	DeploymentTargetName string `json:"deployment_target_name"`
 	DeploymentImage      string `json:"deployment_image"`
+	Message              string `json:"message"`
 }
 
 type Error struct {
@@ -148,7 +149,9 @@ to be a good choice for the deployment.
 
 Your response should be given in JSON format with a field named "deployment_target_name"
 containing the name of the chosen deployment target and a field named "deployment_image"
-containing the name of the image to be deployed.
+containing the name of the image to be deployed. You should also include a field named "message"
+containing a message for the developer. It should explain why you chose the deployment target
+and any other relevant information.
 `
 
 func makeUserContent(req Request) (string, error) {
