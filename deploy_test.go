@@ -17,6 +17,7 @@ func TestSelectDeploymentTargetGPT4(t *testing.T) {
 }
 
 func testSelectDeploymentTarget(t *testing.T, model deployerai.Model) {
+	now := time.Now()
 	type args struct {
 		ctx               context.Context
 		deploymentRequest deployerai.Request
@@ -32,21 +33,22 @@ func testSelectDeploymentTarget(t *testing.T, model deployerai.Model) {
 			args: args{
 				ctx: context.Background(),
 				deploymentRequest: deployerai.Request{
+					CurrentTime:     now,
 					MessageFromUser: "Please deploy pr-1462",
 					DeploymentTargets: []deployerai.Target{
 						{
 							Name:                       "deva",
 							CurrentImage:               "pr-1377",
-							CurrentImageDeploymentTime: time.Now().Add(-time.Hour * 24 * 3),
-							LastRestart:                time.Now().Add(-time.Hour * 24 * 3),
-							LastUsed:                   time.Now().Add(-time.Hour * 24 * 2),
+							CurrentImageDeploymentTime: now.Add(-time.Hour * 24 * 3),
+							LastRestart:                now.Add(-time.Hour * 24 * 3),
+							LastUsed:                   now.Add(-time.Hour * 24 * 2),
 						},
 						{
 							Name:                       "devb",
 							CurrentImage:               "pr-1377",
-							CurrentImageDeploymentTime: time.Now().Add(-time.Hour * 24 * 3),
-							LastRestart:                time.Now().Add(-time.Hour * 24 * 3),
-							LastUsed:                   time.Now().Add(-time.Hour * 24 * 3),
+							CurrentImageDeploymentTime: now.Add(-time.Hour * 24 * 3),
+							LastRestart:                now.Add(-time.Hour * 24 * 3),
+							LastUsed:                   now.Add(-time.Hour * 24 * 3),
 						},
 					},
 					AdditionalNotes: "None",
@@ -60,6 +62,7 @@ func testSelectDeploymentTarget(t *testing.T, model deployerai.Model) {
 			args: args{
 				ctx: context.Background(),
 				deploymentRequest: deployerai.Request{
+					CurrentTime:     now,
 					MessageFromUser: "Please deploy pr-1462",
 					DeploymentTargets: []deployerai.Target{
 						{
@@ -88,6 +91,7 @@ func testSelectDeploymentTarget(t *testing.T, model deployerai.Model) {
 			args: args{
 				ctx: context.Background(),
 				deploymentRequest: deployerai.Request{
+					CurrentTime:     now,
 					MessageFromUser: "Please deploy pr-1462",
 					DeploymentTargets: []deployerai.Target{
 						{

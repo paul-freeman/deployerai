@@ -15,9 +15,10 @@ import (
 )
 
 type Request struct {
-	MessageFromUser   string   `json:"message_from_developer"`
-	DeploymentTargets []Target `json:"possible_deployment_targets"`
-	AdditionalNotes   string   `json:"additional_notes"`
+	CurrentTime       time.Time `json:"current_time"`
+	MessageFromUser   string    `json:"message_from_developer"`
+	DeploymentTargets []Target  `json:"possible_deployment_targets"`
+	AdditionalNotes   string    `json:"additional_notes"`
 }
 
 type Target struct {
